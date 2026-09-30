@@ -420,7 +420,7 @@ function handleDbErr(e){
 function setSaveState(){
   if(state.backend==="gas"){ $("#saveState").innerHTML = sheetUrl?`נשמר ב־Google Sheet בדרייב שלך ומסתנכרן בין מכשירים. <a href="${sheetUrl}" target="_blank" rel="noopener">פתח את הגיליון</a>`:"נשמר ב־Google Sheet בדרייב שלך."; return; }
   $("#saveState").textContent = state.backend==="db" ? "נשמר בחשבון שלך ומסתנכרן בין מכשירים. רק אתה רואה את זה."
-    : state.backend==="local" ? "נשמר רק בדפדפן הזה. כדי לסנכרן בין מכשירים צריך להיות מחובר ל־Claude." : "טוען…";
+    : state.backend==="local" ? "הנתונים נשמרים בדפדפן הזה בלבד." : "טוען…";
 }
 let sampleNS=null;
 let sheetUrl="";
