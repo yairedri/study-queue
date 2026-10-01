@@ -8,12 +8,14 @@
    Single deliberate light theme (user asked for white background and black text). */
 :root{
   color-scheme:light;
-  --bg:#ffffff; --surface:#f6f6f4; --line:#e3e3df; --ink:#0d0d0d; --muted:#5f6068;
-  --btn:#0d0d0d; --btn-ink:#ffffff;
+  --bg:#ffffff; --page:#f1f5fb; --surface:#eef3fa; --line:#dbe3ef; --ink:#0f172a; --muted:#55627a;
+  --btn:#1d4ed8; --btn-ink:#ffffff; --brand:#1d4ed8; --brand2:#0891b2; --brand3:#f97316;
+  --grad:linear-gradient(120deg,#0b1b3f 0%,#1d4ed8 55%,#0891b2 100%);
+  --shadow:0 1px 2px rgba(40,20,90,.06),0 6px 18px rgba(40,20,90,.07);
   --ok:#157347; --ok-soft:#e7f4ec; --warn:#9a5a00; --warn-soft:#fff4de; --crit:#b42318; --crit-soft:#fdeceb;
   --c-book:#8a5a00; --c-book-bg:#fff4dc; --c-prog:#0b6e69; --c-prog-bg:#e2f4f2;
-  --c-vid:#6b3fa0; --c-vid-bg:#f0e9fa; --c-exam:#b42318; --c-exam-bg:#fdeceb;
-  --t-fin:#1d4ed8; --t-fin-bg:#e9effd; --t-psy:#9d2a6c; --t-psy-bg:#fbe9f3; --t-eco:#3f6212; --t-eco-bg:#eef6e2;
+  --c-vid:#1d4ed8; --c-vid-bg:#e6eeff; --c-exam:#b42318; --c-exam-bg:#fdeceb;
+  --t-fin:#1d4ed8; --t-fin-bg:#e9effd; --t-psy:#c2410c; --t-psy-bg:#ffedd5; --t-eco:#3f6212; --t-eco-bg:#eef6e2;
   --f-display:"Secular One","IBM Plex Sans Hebrew",system-ui,sans-serif;
   --f-body:"IBM Plex Sans Hebrew",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --f-num:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -64,7 +66,7 @@ header.top{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justif
 
 /* locked task panel */
 .focus{border:2px solid var(--ink);border-radius:12px;padding:18px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px}
-@media (max-width:760px){.focus{grid-template-columns:1fr}}
+@media (max-width:760px){.focus{grid-template-columns:1fr}.focus .side{order:-1;margin-top:6px}}
 .focus .ttl{font-family:var(--f-display);font-size:clamp(22px,3.4vw,30px);line-height:1.2;overflow-wrap:anywhere}
 .focus .next{background:var(--surface);border-radius:8px;padding:10px 12px;font-size:16px;overflow-wrap:anywhere}
 .focus .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
@@ -201,42 +203,129 @@ select.inl{width:auto}
 
 .toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));inset-inline-start:16px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;font-size:14px;z-index:30;max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:no-preference){.alert,.slot,button{transition:background .15s}}
+
+/* ---------- colorful skin ---------- */
+html,body{background:var(--page)}
+body{margin:0}
+.wrap{gap:22px}
+button.primary:hover:not(:disabled){background:#1e40af}
+.lockbar{background:var(--grad);border-radius:0 0 12px 12px}
+.lockbar .tag{border-color:rgba(255,255,255,.8)}
+.lockbar button{border-color:rgba(255,255,255,.5)}
+.lockbar button:hover{background:rgba(255,255,255,.18)}
+.hero{background:var(--grad);color:#fff;border-radius:0 0 22px 22px;margin-inline:-16px;padding:26px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.hero h1{font-size:clamp(30px,5vw,44px)}
+.hero p{color:rgba(255,255,255,.92)}
+.hero .status-line{color:rgba(255,255,255,.8)}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:5px 12px;border-radius:999px}
+.nav a:hover{background:rgba(255,255,255,.3)}
+section > .section-head h2::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--grad);margin-inline-end:8px;vertical-align:middle}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.settings-box{background:var(--bg);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.settings-box summary{cursor:pointer;padding:12px 16px;font-weight:600}
+.settings-box .inner{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+.slot{background:var(--bg);box-shadow:var(--shadow);border-radius:14px;border-top:5px solid var(--muted)}
+.slot.k-book{border-top-color:#d97706} .slot.k-prog{border-top-color:#0d9488} .slot.k-vid{border-top-color:#2563eb} .slot.k-exam{border-top-color:#dc2626}
+.slot.empty{background:transparent;box-shadow:none;border-top-width:1px}
+.paste{background:var(--bg);box-shadow:var(--shadow);border-radius:14px}
+.tbl-wrap{background:var(--bg);box-shadow:var(--shadow);border-radius:12px}
+.cap{box-shadow:var(--shadow)}
+.entry{background:var(--bg)}
+.alert{background:var(--bg)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:700px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step span.d{display:none}.step:not(.now){padding:8px 10px}}
+.step{border-radius:12px;padding:10px 12px;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.step .n{font-family:var(--f-num);font-weight:700;font-size:13px;color:var(--muted)}
+.step b{font-size:14px}
+.step span.d{font-size:12.5px;color:var(--muted)}
+.step.done{background:#ecfdf3;border-color:#a7e3c0}
+.step.done .n{color:var(--ok)}
+.step.now{background:linear-gradient(120deg,#f97316,#f59e0b);color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+.step.now .n,.step.now span.d{color:rgba(255,255,255,.9)}
+
+/* focus panel v2 */
+.focus{border:none;background:var(--bg);box-shadow:var(--shadow);border-radius:18px;position:relative;overflow:hidden}
+.focus::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--grad)}
+.timer{border-radius:14px;padding:14px;text-align:center;background:var(--surface);display:flex;flex-direction:column;gap:6px}
+.timer .clock{font-family:var(--f-num);font-size:clamp(36px,6vw,52px);font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.timer.run{background:#ecfdf3}
+.timer.run .clock{color:var(--ok)}
+.timer .row{justify-content:center}
+.bigact{display:flex;flex-direction:column;gap:2px;align-items:stretch;text-align:start;padding:10px 14px;border-radius:12px}
+.bigact b{font-size:15px}
+.bigact span{font-size:12.5px;font-weight:400;opacity:.85}
+button.go{background:var(--ok);color:#fff;border-color:var(--ok)}
+button.go:hover{background:#0f5c38}
+button.sess{background:#f97316;color:#fff;border-color:#f97316}
+button.sess:hover{background:#ea580c}
+.howto{font-size:13px;color:var(--muted);background:var(--surface);border-radius:10px;padding:8px 12px}
+
+/* archive */
+.arch-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.arch-tools input[type=search]{flex:1 1 220px}
+.arch{display:flex;flex-direction:column;gap:10px}
+.arch .entry{border-radius:14px;box-shadow:var(--shadow);border-inline-start:5px solid var(--muted)}
+.arch .entry.k-book{border-inline-start-color:#d97706} .arch .entry.k-prog{border-inline-start-color:#0d9488} .arch .entry.k-vid{border-inline-start-color:#2563eb} .arch .entry.k-exam{border-inline-start-color:#dc2626}
+.grade{font-family:var(--f-num);font-weight:700;font-size:13px;border-radius:999px;padding:2px 9px;color:#fff;background:var(--muted)}
+.grade.g-hi{background:var(--ok)} .grade.g-mid{background:#d97706} .grade.g-lo{background:var(--crit)}
+.review{grid-column:1/-1;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.review textarea{width:100%;min-height:70px;resize:vertical}
+.kpis{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.kpis div{background:var(--surface);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column}
+.kpis b{font-family:var(--f-num);font-size:18px}
 </style>
 </head><body>
 
 <div class="wrap" dir="rtl" lang="he">
   <div class="lockbar" id="lockbar" hidden></div>
 
-  <header class="top">
+  <header class="hero">
     <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
       <h1>תור הלימודים</h1>
-      <p class="muted small">משימה אחת נעולה בכל רגע. אין משימה חדשה עד שהנוכחית נסגרת בשאלון.</p>
+      <p>משימה אחת בכל פעם. עובדים, רושמים מה למדת, ומסיימים. כל משימה שסיימת נשמרת בארכיון כדי שתוכל לחזור ולשפר.</p>
       <p class="status-line" id="saveState">טוען…</p>
     </div>
-    <div class="settings">
-      <div class="field"><label class="lbl" for="setDeadline">דדליין כללי</label><input type="date" id="setDeadline"></div>
-      <div class="field"><label class="lbl" for="setHours">שעות בשבוע גרוע</label><input type="number" id="setHours" min="1" max="80" step="0.5"></div>
-      <div class="field"><label class="lbl" for="setBuffer">מקדם ביטחון</label><input type="number" id="setBuffer" min="1" max="3" step="0.1"></div>
-      <div class="field"><label class="lbl" for="setMinLines">מינימום שורות</label><input type="number" id="setMinLines" min="1" max="20" step="1"></div>
-    </div>
+    <nav class="nav" aria-label="ניווט">
+      <a href="#focusArea">עכשיו</a><a href="#queue">הבא בתור</a><a href="#add">הוספת משימות</a><a href="#tablesSec">כל המשימות</a><a href="#archiveSec">ארכיון שסיימתי</a><a href="#journalSec">יומן</a>
+    </nav>
   </header>
+
+  <div class="steps" id="steps" aria-label="איך זה עובד"></div>
 
   <section id="focusArea" aria-label="המשימה הנעולה"></section>
   <section class="alerts" id="alerts" aria-label="התראות"></section>
 
-  <section>
+  <section id="queue">
     <div class="section-head"><h2>הבא בתור</h2><span class="muted small" id="queueNote"></span></div>
     <div class="today" id="today"></div>
   </section>
 
-  <section>
+  <details class="settings-box" id="settingsBox">
+    <summary>⚙ הגדרות (לא חובה)</summary>
+    <div class="inner">
+      <div class="settings">
+        <div class="field"><label class="lbl" for="setDeadline">דדליין כללי (לא חובה)</label><input type="date" id="setDeadline"></div>
+        <div class="field"><label class="lbl" for="setHours">שעות לימוד בשבוע</label><input type="number" id="setHours" min="1" max="80" step="0.5"></div>
+        <div class="field"><label class="lbl" for="setBuffer">מקדם ביטחון</label><input type="number" id="setBuffer" min="1" max="3" step="0.1"></div>
+        <div class="field"><label class="lbl" for="setMinLines">מינימום שורות בשאלון</label><input type="number" id="setMinLines" min="1" max="20" step="1"></div>
+      </div>
+      <p class="small muted">הדדליין רק מפעיל בדיקה אם יש לך מספיק זמן לכל המשימות. בלי דדליין הכל עובד רגיל.</p>
+      <div class="row"><button id="btnBackup">⬇ הורד גיבוי</button><label class="small muted" style="display:flex;gap:6px;align-items:center">⬆ טען גיבוי <input type="file" id="fileRestore" accept="application/json,.json"></label></div>
+      <p class="small muted">הנתונים נשמרים בדפדפן הזה. מומלץ להוריד גיבוי מדי פעם.</p>
+    </div>
+  </details>
+
+  <section id="capSec" hidden>
     <div class="section-head"><h2>בדיקת קיבולת</h2><span class="muted small" id="capNote"></span></div>
     <div class="cap" id="cap"></div>
     <div class="meter" id="meter"><i style="width:0"></i></div>
   </section>
 
-  <section class="paste">
-    <div class="section-head"><h2>הדבקה וחלוקה</h2><span class="muted small">שורה = משימה. כותרת עם נקודתיים קובעת קטגוריה.</span></div>
+  <section class="paste" id="add">
+    <div class="section-head"><h2>הוספת משימות</h2><span class="muted small">שורה = משימה. כותרת עם נקודתיים קובעת קטגוריה.</span></div>
     <label for="pasteBox" class="lbl">הטקסט שלך (מה שכתוב כאן עכשיו הוא דוגמה, תמחק ותדביק משלך)</label>
     <textarea id="pasteBox" spellcheck="false"></textarea>
     <details class="help"><summary>פורמט מדויק (לא חובה)</summary>
@@ -261,13 +350,24 @@ select.inl{width:auto}
     <div id="preview" hidden></div>
   </section>
 
-  <section>
-    <div class="section-head"><h2>הטבלאות</h2><span class="muted small">לחיצה על שם משימה פותחת את דף העבודה שלה.</span></div>
+  <section id="tablesSec">
+    <div class="section-head"><h2>כל המשימות</h2><span class="muted small">לחיצה על שם משימה פותחת את דף העבודה שלה.</span></div>
     <div class="tabs" role="tablist" id="tabs"></div>
     <div id="tableArea"></div>
   </section>
 
-  <section>
+  <section id="archiveSec">
+    <div class="section-head"><h2>ארכיון: כל משימה שסיימתי</h2><span class="muted small" id="archNote"></span></div>
+    <p class="howto">אתה המורה של עצמך. פתח משימה שסיימת, קרא מה כתבת בשאלונים, תן לעצמך ציון ומשוב, ואם צריך צור משימת חזרה.</p>
+    <div class="arch-tools">
+      <input type="search" id="archQ" placeholder="חיפוש לפי שם, מה למדתי, תוצר…" aria-label="חיפוש בארכיון">
+      <select id="archCat" aria-label="קטגוריה"><option value="">כל הקטגוריות</option></select>
+      <select id="archSort" aria-label="מיון"><option value="new">החדשות קודם</option><option value="old">הישנות קודם</option><option value="low">ציון נמוך קודם (לשיפור)</option><option value="nogr">בלי ציון קודם</option></select>
+    </div>
+    <div class="arch" id="archive"></div>
+  </section>
+
+  <section id="journalSec">
     <div class="section-head"><h2>יומן שאלונים</h2><span class="muted small" id="calib"></span></div>
     <div class="journal" id="journal"></div>
   </section>
@@ -384,7 +484,8 @@ const fmtDate = iso=>{ if(!iso) return "—"; const [y,m,d]=iso.split("-"); retu
 const newId = p=>p+"-"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const r1 = n=>Math.round(n*10)/10;
 const lineCount = v=>String(v||"").split(/\r?\n/).filter(l=>l.trim().length>=2).length;
-const fmtElapsed = ms=>{ const m=Math.max(0,Math.floor(ms/60000)); return `${Math.floor(m/60)}:${String(m%60).padStart(2,"0")}`; };
+const fmtElapsed = ms=>{ const s=Math.max(0,Math.floor(ms/1000)), h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=s%60; return (h?h+":":"")+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0"); };
+const elapsedMs = t=>(+t.timerAcc||0)+(t.timerStart?Date.now()-t.timerStart:0);
 
 /* ---------- storage ---------- */
 let col=null; const LS_KEY="study-queue-v1";
@@ -495,48 +596,60 @@ let setT=null;
 }));
 
 /* ---------- render ---------- */
-function render(){ renderLock(); renderAlerts(); renderQueue(); renderCap(); renderTabs(); renderTable(); renderJournal(); if(page.taskId) renderPageChrome(); }
+function render(){ renderSteps(); renderLock(); renderAlerts(); renderQueue(); renderCap(); renderTabs(); renderTable(); renderArchive(); renderJournal(); if(page.taskId) renderPageChrome(); }
+
+function renderSteps(){
+  const all=items(), L=locked(), hasOpen=all.some(i=>i.status==="todo"), sessDone=L&&logs().some(l=>l.taskId===L.id&&!l.release);
+  const cur=!all.length?1:!L?2:!sessDone?3:4;
+  const S=[["הוסף משימות","מדביקים רשימה למטה ולוחצים 'חלק למשימות'"],["בחר משימה ונעל","'התחל ונעל' על משימה מהתור. הטיימר מתחיל לבד"],["עבוד ורשום סשן","בסוף כל ישיבת לימוד: 'סיימתי לעבוד להיום' ושאלון קצר"],["סיים את המשימה","כשהמשימה כולה גמורה: 'המשימה הושלמה'. היא עוברת לארכיון"]];
+  $("#steps").innerHTML=S.map(([b,d],i)=>{ const n=i+1, cls=n<cur?"done":n===cur?"now":""; return `<div class="step ${cls}"><span class="n">${n<cur?"✓":"שלב "+n}</span><b>${b}</b><span class="d">${d}</span></div>`; }).join("");
+}
 
 function renderLock(){
   const L=locked(), bar=$("#lockbar"), area=$("#focusArea");
   if(!L){
     bar.hidden=true;
-    area.innerHTML=`<div class="nolock"><h2>אין משימה נעולה</h2><p class="muted">בחר את המשימה הבאה בתור ולחץ <b>התחל ונעל</b>. מאותו רגע אי אפשר להתחיל שום משימה אחרת עד שהיא נסגרת בשאלון סיום.</p></div>`;
+    const nxt=CATS.map(c=>nextFor(c.k)).filter(Boolean)[0];
+    area.innerHTML=`<div class="nolock card"><h2>אין משימה פעילה כרגע</h2><p class="muted">${nxt?`בחר משימה בקטע <b>הבא בתור</b> ולחץ <b>התחל ונעל</b>. הטיימר יתחיל לרוץ אוטומטית, ועד שתסיים אותה לא תוכל להתחיל משימה אחרת.`:`התור ריק. גלול ל<a href="#add">הוספת משימות</a>, הדבק את הרשימה שלך ולחץ <b>חלק למשימות</b>.`}</p></div>`;
     return;
   }
   const c=CAT[L.cat]||CATS[0], tp=TOPIC[topicOf(L)], act=actualHours(L.id), est=+L.est||0, d=dayDiff(L.due);
-  const running=!!L.timerStart;
+  const running=!!L.timerStart, ms=elapsedMs(L), nSess=logs().filter(l=>l.taskId===L.id&&!l.release).length;
   bar.hidden=false;
-  bar.innerHTML=`<span class="tag">נעול</span><span class="t">${esc(L.title)}</span>
-    <span class="tm" data-elapsed>${running?"⏱ "+fmtElapsed(Date.now()-L.timerStart):""}</span>
-    <button data-act="page" data-id="${L.id}">דף משימה</button><button data-act="session" data-id="${L.id}">סשן</button><button data-act="finish" data-id="${L.id}">סיים</button>`;
+  bar.innerHTML=`<span class="tag">פעיל</span><span class="t">${esc(L.title)}</span>
+    <span class="tm" data-elapsed>⏱ ${fmtElapsed(ms)}${running?"":" (מושהה)"}</span>
+    <button data-act="session" data-id="${L.id}">סיימתי לעבוד</button><button data-act="finish" data-id="${L.id}">המשימה הושלמה</button>`;
   area.innerHTML=`<div class="focus">
-    <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
-      <div class="row"><span class="chip st-active">נעול</span><span class="chip ${c.cls}">${c.name}</span><span class="chip ${tp.cls}">${tp.name}</span>
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+      <div class="row"><span class="chip st-active">המשימה הפעילה</span><span class="chip ${c.cls}">${c.name}</span><span class="chip ${tp.cls}">${tp.name}</span>
         ${L.due?`<span class="num small ${d<0?"over":"muted"}">${fmtDate(L.due)} · ${d<0?"באיחור "+(-d)+" ימים":d+" ימים"}</span>`:""}</div>
       <div class="ttl">${esc(L.title)}</div>
-      <div class="next"><span class="lbl" style="display:block">מתחילים ב…</span>${L.next?esc(L.next):"<span class='muted'>עוד לא נכתב. אחרי השאלון הראשון זה יופיע כאן.</span>"}</div>
+      <div class="next"><span class="lbl" style="display:block">מאיפה ממשיכים</span>${L.next?esc(L.next):"<span class='muted'>זה הסשן הראשון. בסוף תכתוב בשאלון מאיפה להמשיך, וזה יופיע כאן בפעם הבאה.</span>"}</div>
       <div class="stats">
-        <div><span class="lbl">בוצע</span><b>${r1(act)}</b><span class="small muted">שעות</span></div>
-        <div><span class="lbl">הערכה × מקדם</span><b>${r1(est*settings().buffer)}</b><span class="small muted">${r1(est)} × ${settings().buffer}</span></div>
-        <div><span class="lbl">טיימר</span><b data-elapsed2>${running?fmtElapsed(Date.now()-L.timerStart):"—"}</b><span class="small muted">${running?"רץ":"כבוי"}</span></div>
+        <div><span class="lbl">עבדת עד עכשיו</span><b>${r1(act)}</b><span class="small muted">שעות · ${nSess} סשנים</span></div>
+        <div><span class="lbl">הערכה</span><b>${r1(est)}</b><span class="small muted">שעות</span></div>
+        <div><span class="lbl">התקדמות</span><b>${est?Math.min(999,Math.round(act/est*100)):0}%</b><span class="small muted">מההערכה</span></div>
       </div>
+      <p class="howto">איך מתקדמים: עובדים עם הטיימר → בסוף הישיבה לוחצים <b>סיימתי לעבוד להיום</b> וממלאים שאלון קצר → חוזרים מחר מאותה נקודה. כשכל המשימה גמורה לוחצים <b>המשימה הושלמה</b>.</p>
     </div>
     <div class="side">
-      <button class="primary" data-act="page" data-id="${L.id}">פתח דף משימה</button>
-      <button data-act="${running?"timerStop":"timerStart"}" data-id="${L.id}">${running?"אפס טיימר":"הפעל טיימר"}</button>
-      <button data-act="session" data-id="${L.id}">רשום סשן (שאלון)</button>
-      <button data-act="finish" data-id="${L.id}">סיים משימה (שאלון סיום)</button>
-      <button class="ghost danger" data-act="release" data-id="${L.id}">שחרר נעילה בלי להשלים</button>
+      <div class="timer ${running?"run":""}">
+        <span class="lbl">${running?"הטיימר רץ":ms?"הטיימר מושהה":"טיימר"}</span>
+        <div class="clock" data-elapsed2>${fmtElapsed(ms)}</div>
+        <div class="row">${running?`<button data-act="timerPause" data-id="${L.id}">⏸ השהה</button>`:`<button class="go" data-act="timerStart" data-id="${L.id}">▶ ${ms?"המשך":"הפעל"}</button>`}${ms?`<button class="ghost" data-act="timerReset" data-id="${L.id}">↺ אפס</button>`:""}</div>
+      </div>
+      <button class="bigact sess" data-act="session" data-id="${L.id}"><b>📝 סיימתי לעבוד להיום</b><span>שאלון קצר. המשימה נשארת פעילה</span></button>
+      <button class="bigact go" data-act="finish" data-id="${L.id}"><b>✅ המשימה הושלמה</b><span>שאלון סיום. עוברת לארכיון</span></button>
+      <button class="ghost" data-act="page" data-id="${L.id}">📄 דף הסיכומים של המשימה</button>
+      <button class="ghost danger" data-act="release" data-id="${L.id}">החזר לתור בלי לסיים</button>
     </div></div>`;
 }
-setInterval(()=>{ const L=locked(); if(!L||!L.timerStart) return; const v=fmtElapsed(Date.now()-L.timerStart);
-  const a=document.querySelector("[data-elapsed]"); if(a) a.textContent="⏱ "+v; const b=document.querySelector("[data-elapsed2]"); if(b) b.textContent=v; },20000);
+setInterval(()=>{ const L=locked(); if(!L||!L.timerStart) return; const v=fmtElapsed(elapsedMs(L));
+  const a=document.querySelector("[data-elapsed]"); if(a) a.textContent="⏱ "+v; const b=document.querySelector("[data-elapsed2]"); if(b) b.textContent=v; },1000);
 
 function renderAlerts(){
   const s=settings(), out=[], all=items(), open=all.filter(i=>i.status!=="done"), L=locked();
   if(!all.length) out.push(["warn","התחלה","התור ריק. הדבק את הרשימות שלך למטה ולחץ <b>חלק למשימות</b>."]);
-  if(!s.deadline&&all.length) out.push(["warn","הגדרה","אין דדליין כללי. בלי תאריך אין בדיקת קיבולת."]);
   const held=all.filter(i=>statusOf(i)==="held");
   if(held.length) out.push(["crit","נעילה",`יש ${held.length} משימות שהתחילו בגרסה קודמת. רק <b>${esc(L.title)}</b> נעולה. את השאר צריך להחזיר לתור בטבלה.`]);
   open.forEach(i=>{
@@ -564,7 +677,7 @@ function renderQueue(){
     const t=nextFor(c.k);
     if(!t) return `<div class="slot empty"><span class="chip ${c.cls}" style="align-self:flex-start">${c.name}</span><p>אין משימה בתור בקטגוריה הזו.</p></div>`;
     const tp=TOPIC[topicOf(t)], d=dayDiff(t.due);
-    return `<div class="slot"><div class="row"><span class="chip ${c.cls}">${c.name}</span><span class="chip ${tp.cls}">${tp.name}</span></div>
+    return `<div class="slot k-${c.k}"><div class="row"><span class="chip ${c.cls}">${c.name}</span><span class="chip ${tp.cls}">${tp.name}</span></div>
       <div class="t"><button class="link" data-act="page" data-id="${t.id}">${esc(t.title)}</button></div>
       <div class="row small muted"><span class="num">${r1(+t.est||0)} ש׳</span>${t.due?`<span class="num ${d<0?"over":""}">${fmtDate(t.due)}</span>`:""}</div>
       <div class="acts">${L?`<span class="lockmark">נעול עד שתסיים את "${esc(L.title)}"</span>`:`<button class="primary" data-act="start" data-id="${t.id}">התחל ונעל</button>`}</div></div>`;
@@ -582,6 +695,7 @@ function renderCap(){
   const cells=c?[["ימים לדדליין",c.days,""],["שעות זמינות",r1(c.have),`${s.weekHours} ש׳ × ${r1(c.weeks)} שבועות`],["שעות נדרשות",r1(c.need),`${r1(raw)} × ${s.buffer} פחות מה שכבר בוצע`],["ניצול",Math.round(c.ratio*100)+"%",c.ratio>1?"מעל 100% = בלתי אפשרי":c.ratio>0.85?"צפוף. אין מרווח לשבוע רע":"יש מרווח"]]
     :[["ימים לדדליין","—","להגדיר דדליין למעלה"],["שעות זמינות","—",""],["שעות נדרשות",r1(raw*s.buffer),`${r1(raw)} × ${s.buffer}`],["ניצול","—",""]];
   $("#cap").innerHTML=cells.map(([l,v,n])=>`<div><span class="lbl">${l}</span><span class="v">${v}</span><span class="small muted">${esc(n)}</span></div>`).join("");
+  $("#capSec").hidden=!c;
   const m=$("#meter"); m.className="meter"+(c&&c.ratio>1?" crit":c&&c.ratio>0.85?" warn":""); m.firstElementChild.style.width=(c?Math.min(100,c.ratio*100):0)+"%";
   $("#capNote").textContent=`מקדם ביטחון ×${s.buffer} נגד Planning Fallacy`;
 }
@@ -644,6 +758,68 @@ function renderJournal(){
   $("#journal").innerHTML=L.length?L.slice(0,60).map(l=>logHTML(l,true)).join(""):`<div class="empty-state">כאן יופיעו השאלונים. כל סשן נשמר עם מה ביצעת, מה למדת, מה לשפר והתשובות לשאלות הנושא.</div>`;
 }
 
+/* ---------- archive ---------- */
+const archOpen=new Set();
+$("#archCat").insertAdjacentHTML("beforeend",CATS.map(c=>`<option value="${c.k}">${c.name}</option>`).join(""));
+["archQ","archCat","archSort"].forEach(id=>$("#"+id).addEventListener("input",renderArchive));
+$("#archive").addEventListener("toggle",e=>{ const d=e.target; if(!d.dataset||!d.dataset.aid) return; d.open?archOpen.add(d.dataset.aid):archOpen.delete(d.dataset.aid); },true);
+function gradeCls(g){ return g>=8?"g-hi":g>=5?"g-mid":"g-lo"; }
+function renderArchive(){
+  const host=$("#archive"); if(!host) return;
+  if(host.contains(document.activeElement)&&document.activeElement.matches("textarea,select,input")) return;
+  const all=items().filter(i=>i.status==="done"), q=$("#archQ").value.trim().toLowerCase(), cat=$("#archCat").value, sort=$("#archSort").value;
+  const graded=all.filter(i=>i.review&&+i.review.grade), avg=graded.length?r1(graded.reduce((a,i)=>a+(+i.review.grade),0)/graded.length):null;
+  $("#archNote").textContent=all.length?`${all.length} משימות הושלמו · ${r1(all.reduce((a,i)=>a+actualHours(i.id),0))} שעות${avg!==null?` · ציון ממוצע ${avg}`:""}`:"";
+  let list=all.filter(t=>!cat||t.cat===cat);
+  if(q) list=list.filter(t=>{ const L=logs().filter(l=>l.taskId===t.id); const hay=[t.title,t.review?.good,t.review?.better,...L.flatMap(l=>[l.did,l.learned,l.improve,l.output,...(l.answers||[]).map(a=>a.a+" "+(a.detail||""))])].join(" ").toLowerCase(); return hay.includes(q); });
+  const dn=t=>t.doneAt||0, gr=t=>t.review&&+t.review.grade?+t.review.grade:null;
+  list.sort(sort==="old"?(a,b)=>dn(a)-dn(b):sort==="low"?(a,b)=>(gr(a)??11)-(gr(b)??11)||dn(b)-dn(a):sort==="nogr"?(a,b)=>(gr(a)===null?0:1)-(gr(b)===null?0:1)||dn(b)-dn(a):(a,b)=>dn(b)-dn(a));
+  if(!all.length){ host.innerHTML=`<div class="empty-state">עוד לא סיימת משימות. כל משימה שתסיים עם <b>המשימה הושלמה</b> תופיע כאן, עם כל השאלונים שלה, כדי שתוכל לחזור אליה ולשפר.</div>`; return; }
+  if(!list.length){ host.innerHTML=`<div class="empty-state">אין תוצאות לחיפוש הזה.</div>`; return; }
+  host.innerHTML=list.map(t=>{
+    const c=CAT[t.cat]||CATS[0], tp=TOPIC[topicOf(t)], L=logs().filter(l=>l.taskId===t.id), S=L.filter(l=>!l.release), act=actualHours(t.id), g=gr(t), rv=t.review||{};
+    const fin=S.find(l=>l.final), foc=S.length?r1(S.reduce((a,l)=>a+(+l.focus||0),0)/S.length):"—";
+    const days=t.startedAt&&t.doneAt?Math.max(1,Math.round((t.doneAt-(t.created||t.startedAt))/86400000)):"—";
+    return `<details class="entry k-${c.k}" data-aid="${t.id}" ${archOpen.has(t.id)?"open":""}><summary>
+      <span class="num small muted">${t.doneAt?new Date(t.doneAt).toLocaleDateString("he-IL"):""}</span>
+      <span class="chip ${c.cls}">${c.name}</span><b style="overflow-wrap:anywhere">${esc(t.title)}</b>
+      ${g?`<span class="grade ${gradeCls(g)}">${g}/10</span>`:`<span class="chip st-todo">בלי ציון</span>`}
+      <span class="num small muted" style="margin-inline-start:auto">${r1(act)} ש׳ · ${S.length} סשנים</span></summary>
+      <div class="body">
+        <div class="kpis"><div><span class="lbl">שעות בפועל / הערכה</span><b>${r1(act)} / ${r1(+t.est||0)}</b></div><div><span class="lbl">סשנים</span><b>${S.length}</b></div><div><span class="lbl">פוקוס ממוצע</span><b>${foc}</b></div><div><span class="lbl">נושא</span><b style="font-size:14px">${tp.name}</b></div></div>
+        ${fin&&fin.output?`<div style="grid-column:1/-1"><span class="lbl">התוצר הסופי</span><pre>${esc(fin.output)}</pre></div>`:""}
+        <div class="review">
+          <h3>🎓 משוב המורה (אתה)</h3>
+          <div class="row"><label class="lbl" for="rg-${t.id}">ציון</label><select id="rg-${t.id}"><option value="">—</option>${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option ${+rv.grade===n?"selected":""}>${n}</option>`).join("")}</select>
+            ${rv.ts?`<span class="small muted">עודכן ${new Date(rv.ts).toLocaleDateString("he-IL")}</span>`:""}</div>
+          <div class="field"><label class="lbl" for="rgood-${t.id}">מה עשיתי טוב</label><textarea id="rgood-${t.id}">${esc(rv.good||"")}</textarea></div>
+          <div class="field"><label class="lbl" for="rbet-${t.id}">מה לשפר בפעם הבאה</label><textarea id="rbet-${t.id}">${esc(rv.better||"")}</textarea></div>
+          <div class="row"><button class="primary" data-act="saveReview" data-id="${t.id}">שמור משוב</button><button data-act="repeat" data-id="${t.id}">🔁 צור משימת חזרה</button><button class="ghost" data-act="page" data-id="${t.id}">📄 דף הסיכומים</button></div>
+        </div>
+        <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:8px"><span class="lbl">כל השאלונים של המשימה (${L.length})</span>${L.length?L.map(l=>logHTML(l,false)).join(""):`<p class="small muted">אין שאלונים.</p>`}</div>
+      </div></details>`;
+  }).join("");
+}
+function saveReview(id){
+  const t=state.docs.get(id); if(!t) return;
+  const grade=+$("#rg-"+id).value||null, good=$("#rgood-"+id).value.trim(), better=$("#rbet-"+id).value.trim();
+  document.activeElement&&document.activeElement.blur();
+  put(id,{...t,review:{grade,good,better,ts:Date.now()}}); toast("המשוב נשמר");
+}
+
+/* ---------- backup ---------- */
+$("#btnBackup").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(Object.fromEntries(state.docs),null,1)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`study-queue-backup-${todayISO()}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+});
+$("#fileRestore").addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{ const o=JSON.parse(await f.text()); if(!o||typeof o!=="object") throw 0;
+    await putMany(Object.entries(o)); fillSettings(); renderBank(); toast(`הגיבוי נטען (${Object.keys(o).length} רשומות)`);
+  }catch(err){ toast("הקובץ לא נראה כמו גיבוי תקין"); }
+  e.target.value="";
+});
+
 /* ---------- question bank ---------- */
 let bankDirty=false;
 function renderBank(){
@@ -666,13 +842,16 @@ document.addEventListener("click",async e=>{
   const id=b.dataset.id, t=id?state.docs.get(id):null, act=b.dataset.act;
   if(act==="start"){
     const L=locked(); if(L){ toast(`נעול. קודם לסיים את "${L.title}".`); return; }
-    await put(id,{...t,status:"active",startedAt:Date.now()}); toast("המשימה ננעלה. זה הדבר היחיד עכשיו."); window.scrollTo({top:0,behavior:"smooth"});
+    await put(id,{...t,status:"active",startedAt:Date.now(),timerStart:Date.now(),timerAcc:0}); toast("המשימה פעילה והטיימר רץ. בהצלחה!"); window.scrollTo({top:0,behavior:"smooth"});
   }
   else if(act==="session"||act==="finish"){ const L=locked(); if(!L||L.id!==id){ toast("שאלון אפשר למלא רק על המשימה הנעולה."); return; } openQ(id,act==="finish"); }
   else if(act==="release") openRelease(id);
   else if(act==="timerStart") put(id,{...t,timerStart:Date.now()});
-  else if(act==="timerStop") put(id,{...t,timerStart:null});
-  else if(act==="toQueue"||act==="reopen") put(id,{...t,status:"todo",startedAt:null,timerStart:null,order:maxOrder(t.cat)+1});
+  else if(act==="timerPause") put(id,{...t,timerAcc:elapsedMs(t),timerStart:null});
+  else if(act==="timerReset") put(id,{...t,timerAcc:0,timerStart:t.timerStart?Date.now():null});
+  else if(act==="saveReview") saveReview(id);
+  else if(act==="repeat"){ const nid=newId("t"); await put(nid,{kind:"task",title:"חזרה: "+t.title,cat:t.cat,topic:t.topic,est:Math.max(1,Math.round((+t.est||2)/3)),due:"",status:"todo",order:0,next:t.review&&t.review.better?t.review.better.split(/\r?\n/)[0]:"",created:Date.now(),repeatOf:id}); toast("משימת חזרה נוספה לראש התור"); }
+  else if(act==="toQueue"||act==="reopen") put(id,{...t,status:"todo",startedAt:null,timerStart:null,timerAcc:0,order:maxOrder(t.cat)+1});
   else if(act==="up"||act==="down") move(id,act==="up"?-1:1);
   else if(act==="page") openPage(id);
   else if(act==="closePage") closePage();
@@ -796,7 +975,7 @@ $("#qFocus").addEventListener("click",e=>{ const b=e.target.closest("[data-f]");
 function openQ(id,final){
   qTask=id; qFinal=final; qFocusVal=0;
   const t=state.docs.get(id), tk=topicOf(t), tp=TOPIC[tk]; qQs=questions()[tk];
-  $("#qMode").textContent=final?"שאלון סיום משימה":"שאלון סשן";
+  $("#qMode").textContent=final?"✅ שאלון סיום: המשימה תעבור לארכיון":"📝 שאלון סשן: המשימה נשארת פעילה";
   $("#qTitle").textContent=t.title;
   $("#qTopicChip").className="chip "+tp.cls; $("#qTopicChip").textContent=tp.name;
   $("#qTopicTitle").textContent="שאלות "+tp.name;
@@ -806,7 +985,7 @@ function openQ(id,final){
     <textarea id="tqd-${i}" aria-label="פירוט: ${esc(q)}" rows="5" placeholder="פירוט (לא חובה)" hidden></textarea></div>`).join("");
   ["qDid","qLearned","qImprove","qOutput","qNext"].forEach(k=>$("#"+k).value="");
   try{ const dr=JSON.parse(localStorage.getItem("q-draft-"+id)||"null"); if(dr) Object.entries(dr).forEach(([k,v])=>{ const el=document.getElementById(k); if(el){ el.value=v; if(k.startsWith("tqd-")&&v) el.hidden=false; } }); }catch(e){}
-  $("#qMinutes").value = t.timerStart ? Math.max(5,Math.round((Date.now()-t.timerStart)/60000)) : 45;
+  $("#qMinutes").value = elapsedMs(t) ? Math.max(1,Math.round(elapsedMs(t)/60000)) : 45;
   [...$("#qFocus").children].forEach(x=>x.setAttribute("aria-pressed","false"));
   $("#qOv").hidden=false; validateQ(); setTimeout(()=>$("#qDid").focus(),30);
 }
@@ -837,8 +1016,8 @@ $("#qForm").addEventListener("submit",async e=>{
     output:final?$("#qOutput").value.trim():"",next:final?"":$("#qNext").value.trim()};
   closeQ(); try{ localStorage.removeItem("q-draft-"+id); }catch(e){}
   await put(newId("l"),log);
-  await put(id,{...t,status:final?"done":"active",next:log.next||t.next||"",timerStart:null,doneAt:final?Date.now():(t.doneAt||null)});
-  toast(final?"המשימה הושלמה והנעילה שוחררה. אפשר לבחור את הבאה בתור.":"השאלון נשמר. הצעד הבא מחכה לך בפאנל.");
+  await put(id,{...t,status:final?"done":"active",next:log.next||t.next||"",timerStart:null,timerAcc:0,doneAt:final?Date.now():(t.doneAt||null)});
+  toast(final?"כל הכבוד! המשימה הושלמה ונשמרה בארכיון.":"השאלון נשמר. בפעם הבאה תמשיך מאותה נקודה.");
 });
 
 /* ---------- release lock ---------- */
@@ -850,7 +1029,7 @@ $("#relCancel").addEventListener("click",()=>{ $("#relOv").hidden=true; relTask=
 $("#relForm").addEventListener("submit",async e=>{ e.preventDefault(); if($("#relSubmit").disabled||!relTask) return;
   const id=relTask, t=state.docs.get(id); $("#relOv").hidden=true; relTask=null;
   await put(newId("l"),{kind:"log",taskId:id,ts:Date.now(),release:true,why:$("#relWhy").value.trim(),minutes:0});
-  await put(id,{...t,status:"todo",startedAt:null,timerStart:null});
+  await put(id,{...t,status:"todo",startedAt:null,timerStart:null,timerAcc:0});
   toast("הנעילה שוחררה ונרשמה ביומן.");
 });
 
